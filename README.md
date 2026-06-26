@@ -1,148 +1,151 @@
-<div align='center'>
-<img src="https://github.com/zhimin-dev/iptv-checker/blob/main/icon.png" width="150" height="150" alt="logo" />
+<div align="center">
+  <img src="https://github.com/zhimin-dev/iptv-checker/blob/main/icon.png" width="150" height="150" alt="IPTV Checker logo" />
 
-iptv-checker
+  <h1>IPTV Checker</h1>
 
-<sup>iptv-checker, 检查你的播放列表是否可用</sup>
+  <p><strong>检查你的 IPTV 播放列表是否可用</strong></p>
 
-[![Chat Server](https://img.shields.io/badge/chat-discord-7289da.svg)](https://discord.gg/vPTv6UUA)
+  <p>
+    <a href="https://discord.gg/vPTv6UUA"><img src="https://img.shields.io/badge/chat-discord-7289da.svg" alt="Discord" /></a>
+    <a href="https://hub.docker.com/r/zmisgod/iptvchecker"><img src="https://img.shields.io/docker/pulls/zmisgod/iptvchecker?color=2496ED&logo=docker&label=docker%20pulls" alt="Docker Pulls" /></a>
+    <a href="https://github.com/zhimin-dev/iptv-checker/stargazers"><img src="https://img.shields.io/github/stars/zhimin-dev/iptv-checker?color=FFD700&logo=github" alt="Stars" /></a>
+    <a href="https://github.com/zhimin-dev/iptv-checker/releases"><img src="https://img.shields.io/github/v/release/zhimin-dev/iptv-checker?color=blue&label=release" alt="Release" /></a>
+    <a href="https://github.com/zhimin-dev/iptv-checker/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" alt="License" /></a>
+  </p>
 
-中文</a> / <a href="https://github.com/zhimin-dev/iptv-checker/blob/main/README_EN.md">English</a>
+  <p>
+    中文 / <a href="https://github.com/zhimin-dev/iptv-checker/blob/main/README_EN.md">English</a>
+  </p>
 
-<a href="https://trendshift.io/repositories/5647" target="_blank"><img src="https://trendshift.io/api/badge/repositories/5647" alt="zhimin-dev%2Fiptv-checker | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/></a>
+  <a href="https://trendshift.io/repositories/5647" target="_blank"><img src="https://trendshift.io/api/badge/repositories/5647" alt="zhimin-dev/iptv-checker | Trendshift" width="250" height="55" /></a>
 
-<img src="https://github.com/zhimin-dev/iptv-checker/blob/main/web-snapshot.png" />
-
+  <br/><br/>
+  <img src="https://github.com/zhimin-dev/iptv-checker/blob/main/web-snapshot.png" alt="Web 界面截图" width="80%" />
 </div>
+
+## 📖 目录
+
+- [介绍](#介绍)
+- [功能特性](#功能特性)
+- [快速开始](#快速开始)
+  - [Docker](#docker)
+  - [Docker Compose](#docker-compose)
+  - [CLI / 二进制文件](#cli--二进制文件)
+- [配置](#配置)
+  - [GitHub Token](#github-token)
+- [更新日志](#更新日志)
+- [开源协议](#开源协议)
+- [联系](#联系)
 
 ## 介绍
 
-适用于Docker & CMD的IPTV检查工具，请检查您的播放列表是否可用
+IPTV Checker 是一款高性能的 IPTV 播放列表检测工具，支持 Docker 部署和命令行两种使用方式。它可以帮助你快速验证 M3U / M3U8 / TXT 格式的播放列表中的频道是否可用。
 
-- 对于容器版本，请前往 [docker hub](https://hub.docker.com/r/zmisgod/iptvchecker) 页面查找相关命令
+**适用场景：**
 
-- 在命令行模式下，请前往 [GitHub 的发布页面](https://github.com/zhimin-dev/iptv-checker/releases) 下载
+- 定期检测 IPTV 源的有效性，过滤失效链接
+- 通过 Web 管理界面对检测任务进行可视化管理和配置
+- 批量导出可用的 IPv4 / IPv6 频道列表
+- 在 CI/CD 流程中自动化检测播放列表质量
 
-### Docker官方包使用方法
+## 功能特性
 
-[DockerHub](https://hub.docker.com/r/zmisgod/iptvchecker)
+- 🚀 **多种部署方式**：Docker、Docker Compose、CLI 二进制文件，灵活选择
+- 🌐 **Web 管理后台**：直观的 Web 界面，支持任务管理、配置编辑、结果导出
+- 🔍 **多种检测方式**：HTTP 检测 + FFmpeg 强制检测，结果更准确
+- 📋 **后台任务系统**：支持并发检测、定时任务、任务导入导出
+- 📊 **灵活导出**：支持 M3U / TXT 格式导出，可按 IPv4 / IPv6 分别输出
+- 🎨 **深色模式**：内置深色主题，保护眼睛
+- 🔄 **EPG 支持**：支持电子节目单（EPG）配置与管理
+- 📡 **多格式兼容**：支持 M3U、M3U8、TXT 播放列表文件
+- 🔧 **高度可配置**：超时时间、字符替换、自定义排序、关键词匹配
 
-按照下面的命令运行docker版本的iptv-checker
+## 快速开始
+
+### Docker
 
 ```bash
 # 拉取镜像
 docker pull zmisgod/iptvchecker
 
-# 运行镜像
-docker run -d -p 8081:8089 --name myIp zmisgod/iptvchecker
+# 启动容器
+docker run -d \
+  -p 8081:8089 \
+  --name iptv-checker \
+  zmisgod/iptvchecker
 ```
 
-再打开浏览器访问`http://127.0.0.1:8081/`即可
+启动后访问 [http://127.0.0.1:8081](http://127.0.0.1:8081) 即可进入管理界面。
 
-### Docker-Compose 部署
+> 镜像托管在 [Docker Hub](https://hub.docker.com/r/zmisgod/iptvchecker)，可查看所有可用 tag。
+
+### Docker Compose
+
+创建 `docker-compose.yaml`：
+
+```yaml
+version: "3"
+services:
+  iptv-checker:
+    image: zmisgod/iptvchecker
+    ports:
+      - "8081:8089"
+    restart: always
+```
 
 ```bash
 docker-compose up -d
 ```
 
-## star 历史
+### CLI / 二进制文件
 
-[![Star History Chart](https://api.star-history.com/svg?repos=zhimin-dev/iptv-checker&type=date&legend=bottom-right)](https://www.star-history.com/#zhimin-dev/iptv-checker&type=date&legend=bottom-right)
+前往 [GitHub Releases](https://github.com/zhimin-dev/iptv-checker/releases) 下载对应平台的二进制文件，在命令行中直接运行。
+
+## 配置
+
+### GitHub Token
+
+GitHub API 对未认证请求有严格的频率限制（60 次/小时），配置 token 后可提升至 5000 次/小时。
+
+**申请步骤：**
+
+1. 登录 GitHub，访问 **[github.com/settings/tokens](https://github.com/settings/tokens)**
+2. 点击 **Generate new token** → 选择 **Fine-grained token**（推荐）
+3. 配置权限（最小化原则）：
+   - **Expiration**：自定义过期时间
+   - **Repository access**：选择 `Public repositories (read-only)`
+   - **Permissions**：`Contents` → `Read-only`
+4. 生成后复制 token，打开 Web 管理后台 → 系统配置 → base.json，填入 `github_token` 字段
+
+> 保存时系统会自动调用 GitHub API 验证 token 有效性。
+
+**请求策略：**
+
+| 场景 | 行为 |
+| --- | --- |
+| 已配置有效 token | 使用认证 API（5000 次/时） |
+| 未配置 token | 优先尝试 API，触发限流后自动降级为 HTML 解析 |
+| token 无效 | 保存时拒绝并提示错误 |
 
 ## 更新日志
 
-- 4.5.1
-  - 尝试修复不检查的问题
-  - 支持cli触发检查
-- 4.5.0
-  - 支持epg配置
-- 4.4.0
-  - 支持配置备份和恢复
-  - 支持ipv4、ipv6结果的单独导出
-  - 一些问题的修复(0203)
-- 4.3.0
-  - 新增台标上传配置
-  - 修复爬取频道的错误导致服务异常
-- 4.2.0
-  - 新增
-    - 想看的频道
-    - 设置-爬取配置
-    - 特殊字符替换移动到设置菜单下
-  - bug修复
-    - 解决繁体转简体无效的bug
-- 4.1.9
-  - 修复部分缺失的翻译
-  - 修复任务执行完毕后，没有更新最后更新时间
-  - 增加【字符替换配置】功能
-- 4.1.7
-  - 修复后台可能不正常执行的bug
-  - 本地检测UI和后台检测UI复用
-- 4.1.6
-  - 已解决ffmpeg检查卡顿的问题
-  - 解决网页刷新后显示不存在的问题
-- v4.1.5
-  - 修复网页icon不能正常显示
-  - 解决部分英文翻译缺失
-  - 尝试解决ffmpeg检测卡顿问题
-- v4.1.4
-  - 新增
-    - 增加捐赠入口
-    - 后台任务支持仅保留2个相同名称
-    - 后台任务新增支持http检查时rtmp等非http源，可跳过
-  - 优化
-    - 后台新增任务UI、逻辑变化，更加符合用户操作逻辑
-    - 后台任务列表优化
-    - 后台任务删除时，增加弹框提示
-  - bug修复
-    - 修复了ffmepg检查导致后台任务无法进行的问题
-    - 优化了重命名频道名称导致检查卡住的问题
-- 4.1.3
-  - 修复后台检查失败，导致所有任务无法进行
-- 4.1.2
-  - 去掉节目名称中的一些无用字符，比如`[HD]`或者`123231 [SD]`
-  - 修复不检查时导出的文件为空的bug
-  - cmd模式搜索频道模式
-  - 支持强制ffmpeg检查，检测结果更加准确
-- 4.1.1
-  - 修复无法解析复杂的m3u文件的bug
-- v4.1.0
-  - [修复bug 77](https://github.com/zhimin-dev/iptv-checker/issues/77)
-  - [增加自定义排序](https://github.com/zhimin-dev/iptv-checker/issues/69)
-  - [支持txt文件](https://github.com/zhimin-dev/iptv-checker/issues/74)
-  - 修复黑夜模式的ui样式bug
-  - 增加快速检测的页面
-- v4.0.4
-  - 升级tauri 2.0
-  - 在线播放支持全屏并显示正确位置
-- v4.0.3
-  - 修复windows平台无法播放的问题
-- v4.0.1
-  - bug修复
-    - 检测源输入框无法识别数据问题
-    - 桌面版检查详情页无法拖动问题
-    - 桌面版检查详情页在线播放体验优化
-    - 检查数据后再通过公共订阅源菜单进入检查详情页会出现检查设置菜单还是上一次状态
-    - 修复源检测无法暂停、检查失败的问题
-  - 后台任务支持导出、导入
-  - 后台任务增加不检查任务
-- 4.0.0
-  - UI更新
-  - 支持windows && mac os && linux 桌面端
-- 3.2.1
-  - 后台任务支持并发、排序设置
-  - 优化任务列表下载界面
-  - 修复智能框解析数据错误问题
-- 3.2.0
-  - 支持关键词匹配
-  - 支持超时时间配置
-- 3.1.1
-  - 修复后台检查后cpu增高的问题
-- 3.1.0
-  - 支持任务编辑
-  - 支持任务立即执行
-- 3.0.0
-  - 支持后台检查
+详见 [CHANGELOG.md](https://github.com/zhimin-dev/iptv-checker/blob/main/CHANGELOG.md)。
+
+### 最近更新
+
+- **4.6.0** — GitHub 抓取迁移至 REST API、安全加固（SSRF / 路径穿越修复）、性能优化（连接池复用、减少 clone）、代码质量提升、11 项 Bug 修复
+- **4.5.1** — 修复不检查的问题、支持 CLI 触发检查
+- **4.5.0** — 支持 EPG 配置
+- **4.4.0** — 配置备份恢复、IPv4/IPv6 分别导出
+
+[查看完整更新日志 →](https://github.com/zhimin-dev/iptv-checker/blob/main/CHANGELOG.md)
+
+## 开源协议
+
+本项目基于 [MIT License](https://github.com/zhimin-dev/iptv-checker/blob/main/LICENSE) 开源。
 
 ## 联系
 
-[知敏博客](https://zmis.me/user/zmisgod)
+- 博客：[知敏博客](https://zmis.me/user/zmisgod)
+- 问题反馈：[GitHub Issues](https://github.com/zhimin-dev/iptv-checker/issues)
+- 讨论交流：[Discord](https://discord.gg/vPTv6UUA)

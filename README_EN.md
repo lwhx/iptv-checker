@@ -1,146 +1,151 @@
-<div align='center'>
-<img src="https://github.com/zhimin-dev/iptv-checker/blob/main/icon.png" width="150" height="150" alt="logo" />
+<div align="center">
+  <img src="https://github.com/zhimin-dev/iptv-checker/blob/main/icon.png" width="150" height="150" alt="IPTV Checker logo" />
 
-iptv-checker
+  <h1>IPTV Checker</h1>
 
-<sup>iptv-checker, check your playlist is available</sup>
+  <p><strong>Check if your IPTV playlist is available</strong></p>
 
-[![Chat Server](https://img.shields.io/badge/chat-discord-7289da.svg)](https://discord.gg/vPTv6UUA)
+  <p>
+    <a href="https://discord.gg/vPTv6UUA"><img src="https://img.shields.io/badge/chat-discord-7289da.svg" alt="Discord" /></a>
+    <a href="https://hub.docker.com/r/zmisgod/iptvchecker"><img src="https://img.shields.io/docker/pulls/zmisgod/iptvchecker?color=2496ED&logo=docker&label=docker%20pulls" alt="Docker Pulls" /></a>
+    <a href="https://github.com/zhimin-dev/iptv-checker/stargazers"><img src="https://img.shields.io/github/stars/zhimin-dev/iptv-checker?color=FFD700&logo=github" alt="Stars" /></a>
+    <a href="https://github.com/zhimin-dev/iptv-checker/releases"><img src="https://img.shields.io/github/v/release/zhimin-dev/iptv-checker?color=blue&label=release" alt="Release" /></a>
+    <a href="https://github.com/zhimin-dev/iptv-checker/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" alt="License" /></a>
+  </p>
 
-<a href="https://github.com/zhimin-dev/iptv-checker/blob/main/README.md">中文</a> / English
+  <p>
+    <a href="https://github.com/zhimin-dev/iptv-checker/blob/main/README.md">中文</a> / English
+  </p>
 
-<a href="https://trendshift.io/repositories/5647" target="_blank"><img src="https://trendshift.io/api/badge/repositories/5647" alt="zhimin-dev%2Fiptv-checker | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/></a>
+  <a href="https://trendshift.io/repositories/5647" target="_blank"><img src="https://trendshift.io/api/badge/repositories/5647" alt="zhimin-dev/iptv-checker | Trendshift" width="250" height="55" /></a>
 
-<img src="https://github.com/zhimin-dev/iptv-checker/blob/main/web-snapshot-en.png" />
-
+  <br/><br/>
+  <img src="https://github.com/zhimin-dev/iptv-checker/blob/main/web-snapshot-en.png" alt="Web UI Screenshot" width="80%" />
 </div>
 
-## introduce
+## 📖 Table of Contents
 
-IPTV checker tool for Docker && Desktop && CMD, check your playlist is available
+- [Introduction](#introduction)
+- [Features](#features)
+- [Quick Start](#quick-start)
+  - [Docker](#docker)
+  - [Docker Compose](#docker-compose)
+  - [CLI / Binary](#cli--binary)
+- [Configuration](#configuration)
+  - [GitHub Token](#github-token)
+- [Changelog](#changelog)
+- [License](#license)
+- [Contact](#contact)
 
-- For container versions, go to the [docker hub](https://hub.docker.com/r/zmisgod/iptvchecker) page to find the relevant commands
+## Introduction
 
-- In command-line mode, you can find download files from this page [GitHub's release page](https://github.com/zhimin-dev/iptv-checker/releases)
+IPTV Checker is a high-performance IPTV playlist validation tool available for both Docker and CLI usage. It helps you quickly verify whether channels in M3U / M3U8 / TXT playlists are accessible.
 
-### Docker Official Package Usage
+**Use Cases:**
 
-[DockerHub](https://hub.docker.com/r/zmisgod/iptvchecker)
+- Periodically check IPTV source availability and filter out dead links
+- Manage and configure check tasks via an intuitive Web admin panel
+- Batch export working IPv4 / IPv6 channel lists
+- Automate playlist quality checks in CI/CD pipelines
 
-Run the docker version of iptv-checker with the following commands
+## Features
+
+- 🚀 **Multiple Deployment Options** — Docker, Docker Compose, or standalone CLI binary
+- 🌐 **Web Admin Panel** — Intuitive web UI for task management, configuration editing, and result export
+- 🔍 **Multiple Check Methods** — HTTP checks + FFmpeg validation for more accurate results
+- 📋 **Background Task System** — Concurrent checks, scheduled tasks, import/export support
+- 📊 **Flexible Export** — Export as M3U / TXT, with optional IPv4 / IPv6 separation
+- 🎨 **Dark Mode** — Built-in dark theme for eye comfort
+- 🔄 **EPG Support** — Electronic Program Guide configuration and management
+- 📡 **Multi-format Support** — M3U, M3U8, and TXT playlist files
+- 🔧 **Highly Configurable** — Timeout, character replacement, custom sorting, keyword matching
+
+## Quick Start
+
+### Docker
 
 ```bash
+# Pull the image
 docker pull zmisgod/iptvchecker
 
-docker run -d -p 8081:8089 --name myIp zmisgod/iptvchecker
+# Run the container
+docker run -d \
+  -p 8081:8089 \
+  --name iptv-checker \
+  zmisgod/iptvchecker
 ```
 
-Then open your browser and visit `http://127.0.0.1:8081/`.
+Visit [http://127.0.0.1:8081](http://127.0.0.1:8081) to access the admin panel.
 
-### Docker-Compose Deployment
+> The image is hosted on [Docker Hub](https://hub.docker.com/r/zmisgod/iptvchecker), where you can find all available tags.
+
+### Docker Compose
+
+Create a `docker-compose.yaml`:
+
+```yaml
+version: "3"
+services:
+  iptv-checker:
+    image: zmisgod/iptvchecker
+    ports:
+      - "8081:8089"
+    restart: always
+```
 
 ```bash
 docker-compose up -d
 ```
 
-## Star History
+### CLI / Binary
 
-[![Star History Chart](https://api.star-history.com/svg?repos=zhimin-dev/iptv-checker&type=date&legend=bottom-right)](https://www.star-history.com/#zhimin-dev/iptv-checker&type=date&legend=bottom-right)
+Download the latest binary for your platform from [GitHub Releases](https://github.com/zhimin-dev/iptv-checker/releases) and run it directly from the command line.
+
+## Configuration
+
+### GitHub Token
+
+GitHub API has strict rate limits for unauthenticated requests (60 req/h). Configuring a token increases the limit to 5000 req/h.
+
+**How to Get a Token:**
+
+1. Log in to GitHub and visit **[github.com/settings/tokens](https://github.com/settings/tokens)**
+2. Click **Generate new token** → Select **Fine-grained token** (recommended)
+3. Configure permissions (principle of least privilege):
+   - **Expiration** — Set a custom expiration date
+   - **Repository access** — Select `Public repositories (read-only)`
+   - **Permissions** — `Contents` → `Read-only`
+4. Copy the generated token, go to Web Admin → System Config → base.json, and fill it into the `github_token` field
+
+> The system automatically verifies the token via the GitHub API on save.
+
+**Request Strategy:**
+
+| Scenario | Behavior |
+| --- | --- |
+| Valid token configured | Uses authenticated API (5000 req/h) |
+| No token configured | Tries API first, falls back to HTML parsing on rate limit |
+| Invalid token | Rejected on save with error message |
 
 ## Changelog
 
-- 4.5.1
-  - Try to fix issues that are not being checked
-  - Support triggering checks via CLI
-- 4.5.0
-  - support EPG configuration
-- 4.4.0
-  - Supports configuration backup and restore
-  - Supports separate export of IPv4 and IPv6 results
-  - Fixes some issues(0203)
-- 4.3.0
-  - Add new TV logo upload configuration
-  - Fix errors in crawling channels that cause service exceptions
-- 4.2.0
-  - new feature
-    - add Favourite Channels
-    - add spider setting
-    - Move the special character replacement to the settings menu
-  - bug fix
-    - Fix the bug where converting Traditional Chinese to Simplified Chinese doesn't work
-- 4.1.9
-  - Fixed some missing translations
-  - Fixed the issue where the last updated time was not refreshed after task completion
-  - Added 'Character Replacement Configuration' feature
-- 4.1.7
-  - Fix the bug that may cause background processes to malfunction
-  - Reuse of local detection UI and backend detection UI
-- 4.1.6
-  - Fixed the issue where ffmpeg checks stuttering
-  - Fix an issue where the web page is displayed after refresh
-- v4.1.5
-  - Fixed the issue that the icon of the webpage could not be displayed properly
-  - Fixed some missing English translations
-  - Try to resolve the ffmpeg detection stuttering issue
-- v4.1.4
-  - New Features
-    - Added a donation entry
-    - Background tasks now support retaining only two tasks with the same name
-    - Background tasks now support skipping non-HTTP sources (e.g., RTMP) during HTTP checks
-  - Optimizations
-    - Improved UI and logic for adding background tasks, making it more aligned with user operation habits
-    - Optimized the background task list
-    - Added a confirmation pop-up when deleting background tasks
-  - Bug Fixes
-    - Fixed an issue where FFmpeg checks caused background tasks to fail
-    - Optimized the issue of checks getting stuck due to renaming channel names
-- 4.1.3
-  - Resolved backend verification failure halting all jobs
-- 4.1.2
-  - Remove some useless characters from the program name, such as '[HD]' or '123231 [SD]'
-  - Fixed the bug that the exported file was empty when the check was not checked
-  - cmd mode to search for channel mode
-  - FFMPEG check is supported to force the detection result to be more accurate
-- 4.1.1
-  - Fixed the bug that complex m3u files could not be parsed
-- v4.1.0
-  - [fix bug 77](https://github.com/zhimin-dev/iptv-checker/issues/77)
-  - [feature: custom sort](https://github.com/zhimin-dev/iptv-checker/issues/69)
-  - [feature: support txt file](https://github.com/zhimin-dev/iptv-checker/issues/74)
-  - fix dark mode ui error
-  - add fast checker page
-- v4.0.4
-  - upgrade tauri 1.0 to 2.0
-  - The online playback supports full screen and shows the correct position
-- v4.0.3
-  - fixed the issue that it could not be played on the Windows platform
-- v4.0.1
-  - Bug Fixes
-    - Issue with the source input box not recognizing data
-    - Desktop version details page unable to drag issue
-    - Optimized online viewing experience on the desktop version details page
-    - Entering details page through public subscription source menu after checking data would show the last state of the check settings menu
-    - Fixed issue with source detection not being able to pause and check failure
-  - Background tasks support export and import
-  - Background tasks added option to not check tasks
-- v4.0.0
-  - UI Update
-  - Support for Windows, macOS, and Linux desktop clients
-- v3.2.1
-  - Background tasks support concurrency and sorting settings
-  - Optimized task list download interface
-  - Fixed issue with smart box parsing data incorrectly
-- v3.2.0
-  - Support for keyword matching
-  - Support for timeout configuration
-- v3.1.1
-  - Fixed issue with increased CPU usage after background checks
-- v3.1.0
-  - Support for task editing
-  - Support for immediate task execution
-- v3.0.0
-  - Support for background checking
+See [CHANGELOG.md](https://github.com/zhimin-dev/iptv-checker/blob/main/CHANGELOG.md) for the full history.
+
+### Recent Updates
+
+- **4.6.0** — GitHub scraping migration to REST API, security hardening (SSRF / path traversal fixes), performance optimizations (connection pool reuse, reduced cloning), code quality improvements, 11 bug fixes
+- **4.5.1** — Fixed issues with checks not executing, added CLI trigger support
+- **4.5.0** — EPG configuration support
+- **4.4.0** — Config backup/restore, separate IPv4/IPv6 export
+
+[View full changelog →](https://github.com/zhimin-dev/iptv-checker/blob/main/CHANGELOG.md)
+
+## License
+
+This project is open source under the [MIT License](https://github.com/zhimin-dev/iptv-checker/blob/main/LICENSE).
 
 ## Contact
 
-[My blog](https://zmis.me/user/zmisgod)
+- Blog: [Zhimin's Blog](https://zmis.me/user/zmisgod)
+- Issues: [GitHub Issues](https://github.com/zhimin-dev/iptv-checker/issues)
+- Chat: [Discord](https://discord.gg/vPTv6UUA)
