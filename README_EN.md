@@ -58,7 +58,11 @@ IPTV Checker is a high-performance IPTV playlist validation tool available for b
 - 🎨 **Dark Mode** — Built-in dark theme for eye comfort
 - 🔄 **EPG Support** — Electronic Program Guide configuration and management
 - 📡 **Multi-format Support** — M3U, M3U8, and TXT playlist files
-- 🔧 **Highly Configurable** — Timeout, character replacement, custom sorting, keyword matching
+- 🏷️ **Smart Channel Naming** — Auto-normalize tvg-name/tvg-id from EPG data, stripping quality suffixes like "4K"
+- 📺 **Channel Name Display Mode** — Append resolution labels (HD/FHD) or numeric values (720p/1080p) to channel names, multi-resolution marked with *
+- 📁 **Channel Group Mapping** — Maintain local tvg-name to group-title mappings with EPG-assisted quick matching
+- 🔗 **Global Host Config** — Unified logo/source URL host management, base.json takes priority
+- 🔧 **Highly Configurable** — Timeout, custom sorting, keyword matching, fastest network selection
 
 ## Quick Start
 
@@ -133,6 +137,7 @@ See [CHANGELOG.md](https://github.com/zhimin-dev/iptv-checker/blob/main/CHANGELO
 
 ### Recent Updates
 
+- **4.7.0** — EPG channel name auto-matching, resolution suffix display modes, channel group mapping, unified global host management, group mapping import/export support
 - **4.6.0** — GitHub scraping migration to REST API, security hardening (SSRF / path traversal fixes), performance optimizations (connection pool reuse, reduced cloning), code quality improvements, 11 bug fixes
 - **4.5.1** — Fixed issues with checks not executing, added CLI trigger support
 - **4.5.0** — EPG configuration support
