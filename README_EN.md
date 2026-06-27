@@ -1,7 +1,7 @@
 <div align="center">
   <img src="https://github.com/zhimin-dev/iptv-checker/blob/main/icon.png" width="150" height="150" alt="IPTV Checker logo" />
 
-  <h1>IPTV Checker</h1>
+  <h1>iptv-checker</h1>
 
   <p><strong>Check if your IPTV playlist is available</strong></p>
 
