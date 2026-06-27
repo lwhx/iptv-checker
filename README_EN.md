@@ -61,7 +61,6 @@ IPTV Checker is a high-performance IPTV playlist validation tool available for b
 - 🏷️ **Smart Channel Naming** — Auto-normalize tvg-name/tvg-id from EPG data, stripping quality suffixes like "4K"
 - 📺 **Channel Name Display Mode** — Append resolution labels (HD/FHD) or numeric values (720p/1080p) to channel names, multi-resolution marked with *
 - 📁 **Channel Group Mapping** — Maintain local tvg-name to group-title mappings with EPG-assisted quick matching
-- 🔗 **Global Host Config** — Unified logo/source URL host management, base.json takes priority
 - 🔧 **Highly Configurable** — Timeout, custom sorting, keyword matching, fastest network selection
 
 ## Quick Start
@@ -119,7 +118,7 @@ GitHub API has strict rate limits for unauthenticated requests (60 req/h). Confi
    - **Expiration** — Set a custom expiration date
    - **Repository access** — Select `Public repositories (read-only)`
    - **Permissions** — `Contents` → `Read-only`
-4. Copy the generated token, go to Web Admin → System Config → base.json, and fill it into the `github_token` field
+4. Copy the generated token, go to Web Admin → System Config → base config, and fill it into the `github_token` field
 
 > The system automatically verifies the token via the GitHub API on save.
 
